@@ -8,7 +8,7 @@ Simple Java console app to manage study subjects, tasks, and track study time wi
 - **Study timer**: log minutes studied per subject
 - **Progress**: see per-subject totals vs. default goals and task completion
 
-### Requirementsa
+### Requirements
 - Java 8 or later (JDK)
 - Windows users can optionally use `demo.bat`
 
@@ -60,6 +60,25 @@ Study time in minutes: 25
 Studying Math for 25 minutes...
 Press Enter when done studying.
 Study time updated! Total for Math: 25 minutes
+```
+
+After logging time, you can view progress:
+
+```text
+--- STUDY MANAGER ---
+1. Manage Subjects
+2. Manage Tasks
+3. Study Timer
+4. View Progress
+5. Exit
+Choice: 4
+
+--- Progress ---
+Math: 25/60 min (41.7%)
+Science: 0/60 min (0.0%)
+English: 0/60 min (0.0%)
+
+Tasks: 0/0 completed
 ```
 
 ### Troubleshooting
