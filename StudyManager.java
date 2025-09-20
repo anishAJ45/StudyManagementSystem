@@ -83,10 +83,10 @@ public class StudyManager {
                     System.out.println("❌ Subject removed successfully!");
                 }
             } else {
-                System.out.println("Invalid choice! Please select 1-3.");
+                System.out.println("❌ Invalid choice! Please select 1-3.");
             }
         } catch (Exception e) {
-            System.out.println("Invalid input! Please enter a number.");
+            System.out.println("❌ Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -110,10 +110,10 @@ public class StudyManager {
             } else if (choice == 4) {
                 removeTask();
             } else {
-                System.out.println("Invalid choice! Please select 1-4.");
+                System.out.println("❌ Invalid choice! Please select 1-4.");
             }
         } catch (Exception e) {
-            System.out.println("Invalid input! Please enter a number.");
+            System.out.println("❌ Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -180,10 +180,10 @@ public class StudyManager {
                 taskDone.set(actualIndex, true);
                 System.out.println("✓ Task marked as completed: \"" + tasks.get(actualIndex) + "\"");
             } else {
-                System.out.println("Invalid task number!");
+                System.out.println("❌ Invalid task number!");
             }
         } catch (Exception e) {
-            System.out.println("Invalid input! Please enter a number.");
+            System.out.println("❌ Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -213,10 +213,10 @@ public class StudyManager {
                 taskDone.remove(index);
                 System.out.println("✓ Task removed: \"" + removedTask + "\"");
             } else {
-                System.out.println("Invalid task number!");
+                System.out.println("❌ Invalid task number!");
             }
         } catch (Exception e) {
-            System.out.println("Invalid input! Please enter a number.");
+            System.out.println("❌ Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
