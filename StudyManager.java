@@ -33,7 +33,7 @@ public class StudyManager {
             else if (choice == 3) studyTimer();
             else if (choice == 4) viewProgress();
             else if (choice == 5) {
-                System.out.println("Thanks for using Study Manager!");
+                System.out.println("👋 Thanks for using Study Manager! Keep studying! 📚");
                 break;
             }
         }
@@ -266,7 +266,7 @@ public class StudyManager {
 
             // Update study time
             studyTime.put(subject, studyTime.get(subject) + minutes);
-            System.out.println("Study time updated! Total for " + subject + ": " + studyTime.get(subject) + " minutes");
+            System.out.println("✅ Study time updated! Total for " + subject + ": " + studyTime.get(subject) + " minutes");
 
         } catch (Exception e) {
             System.out.println("Invalid input! Please enter numbers only.");
