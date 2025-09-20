@@ -10,6 +10,17 @@ public class StudyManager {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // Initialize default subjects
+        subjects.add("Math");
+        subjects.add("Science");
+        subjects.add("English");
+        
+        // Set default goals and study time
+        for (String subject : subjects) {
+            studyTime.put(subject, 0);
+            goals.put(subject, 60);
+        }
+        
         System.out.println("Study Management System");
         System.out.println("Welcome to your study tracker!");
     }
