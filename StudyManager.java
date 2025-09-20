@@ -40,12 +40,12 @@ public class StudyManager {
     }
 
     static void showMenu() {
-        System.out.println("\n--- STUDY MANAGER ---");
-        System.out.println("1. Manage Subjects");
-        System.out.println("2. Manage Tasks");
-        System.out.println("3. Study Timer");
-        System.out.println("4. View Progress");
-        System.out.println("5. Exit");
+        System.out.println("\n📚 --- STUDY MANAGER --- 📚");
+        System.out.println("1. 📖 Manage Subjects");
+        System.out.println("2. ✅ Manage Tasks");
+        System.out.println("3. ⏰ Study Timer");
+        System.out.println("4. 📊 View Progress");
+        System.out.println("5. 🚪 Exit");
         System.out.print("Choice: ");
     }
 
