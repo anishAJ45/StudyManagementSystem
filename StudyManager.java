@@ -225,11 +225,11 @@ public class StudyManager {
 
     static void studyTimer() {
         if (subjects.isEmpty()) {
-            System.out.println("Add subjects first!");
+            System.out.println("❌ Add subjects first!");
             return;
         }
 
-        System.out.println("\n--- Study Timer ---");
+        System.out.println("\n⏰ --- Study Timer --- ⏰");
         for (int i = 0; i < subjects.size(); i++) {
             System.out.printf("%d. %s\n", i+1, subjects.get(i));
         }
@@ -254,8 +254,8 @@ public class StudyManager {
                 return;
             }
 
-            System.out.println("\nStudying " + subject + " for " + minutes + " minutes...");
-            System.out.println("Press Enter when done studying.");
+            System.out.println("\n🎯 Studying " + subject + " for " + minutes + " minutes...");
+            System.out.println("⏳ Press Enter when done studying.");
 
             // Try to read next line, but don't fail if there's no input
             try {
