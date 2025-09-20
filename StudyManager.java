@@ -22,6 +22,7 @@ public class StudyManager {
         }
         
         System.out.println("=== Study Management System ===");
+        System.out.println("Created by anishAJ45");
         
         while (true) {
             showMenu();
