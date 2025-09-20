@@ -197,20 +197,24 @@ public class StudyManager {
     }
 
     static void viewProgress() {
-        System.out.println("\n--- Progress ---");
+        System.out.println("\n--- Progress Dashboard ---");
 
         if (subjects.isEmpty()) {
             System.out.println("No subjects to show.");
             return;
         }
 
-        System.out.println("\nStudy Time Progress:");
+        System.out.println("\n📊 Study Time Progress:");
+        System.out.println("=".repeat(50));
+
         for (String subject : subjects) {
             int studied = studyTime.get(subject);
             int goal = goals.get(subject);
             double percent = (double) studied / goal * 100;
-            System.out.printf("%s: %d/%d min (%.1f%%)\n",
-                subject, studied, goal, percent);
+            String progressBar = createProgressBar(studied, goal, 20);
+
+            System.out.printf("%-10s [%s] %d/%d min (%.1f%%)\n",
+                subject, progressBar, studied, goal, percent);
         }
 
         // Show task completion
@@ -219,9 +223,27 @@ public class StudyManager {
             for (boolean done : taskDone) {
                 if (done) completed++;
             }
-            System.out.printf("\nTasks: %d/%d completed\n", completed, tasks.size());
+            double completionRate = (double) completed / tasks.size() * 100;
+            String completionBar = createProgressBar(completed, tasks.size(), 15);
+            System.out.printf("\nTasks     [%s] %d/%d (%.1f%%)\n",
+                completionBar, completed, tasks.size(), completionRate);
         } else {
             System.out.println("\nTasks: 0/0 completed");
         }
+    }
+
+    static String createProgressBar(int current, int goal, int barLength) {
+        int filled = goal > 0 ? (int)((double)current / goal * barLength) : 0;
+        if (filled > barLength) filled = barLength;
+
+        StringBuilder bar = new StringBuilder();
+        for (int i = 0; i < barLength; i++) {
+            if (i < filled) {
+                bar.append("█");
+            } else {
+                bar.append("░");
+            }
+        }
+        return bar.toString();
     }
 }
