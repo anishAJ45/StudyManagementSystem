@@ -95,7 +95,7 @@ public class StudyManager {
 
     static void manageTasks() {
         System.out.println("\n--- Tasks ---");
-        System.out.println("1. View  2. Add");
+        System.out.println("1. View  2. Add  3. Mark Done  4. Remove Task");
 
         try {
             int choice = sc.nextInt();
@@ -105,8 +105,12 @@ public class StudyManager {
                 viewTasks();
             } else if (choice == 2) {
                 addTask();
+            } else if (choice == 3) {
+                markTaskDone();
+            } else if (choice == 4) {
+                removeTask();
             } else {
-                System.out.println("Invalid choice! Please select 1-2.");
+                System.out.println("Invalid choice! Please select 1-4.");
             }
         } catch (Exception e) {
             System.out.println("Invalid input! Please enter a number.");
@@ -140,6 +144,83 @@ public class StudyManager {
         tasks.add(task);
         taskDone.add(false);
         System.out.println("✓ Task added successfully: \"" + task + "\"");
+    }
+
+    static void markTaskDone() {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks available. Add some tasks first!");
+            return;
+        }
+
+        // Show only incomplete tasks
+        ArrayList<Integer> incompleteIndexes = new ArrayList<>();
+        System.out.println("\nIncomplete Tasks:");
+        int displayNum = 1;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (!taskDone.get(i)) {
+                System.out.printf("%d. %s\n", displayNum, tasks.get(i));
+                incompleteIndexes.add(i);
+                displayNum++;
+            }
+        }
+
+        if (incompleteIndexes.isEmpty()) {
+            System.out.println("All tasks are already completed! 🎉");
+            return;
+        }
+
+        try {
+            System.out.print("Mark which task as done (1-" + incompleteIndexes.size() + ")? ");
+            int choice = sc.nextInt() - 1;
+            sc.nextLine();
+
+            if (choice >= 0 && choice < incompleteIndexes.size()) {
+                int actualIndex = incompleteIndexes.get(choice);
+                taskDone.set(actualIndex, true);
+                System.out.println("✓ Task marked as completed: \"" + tasks.get(actualIndex) + "\"");
+            } else {
+                System.out.println("Invalid task number!");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input! Please enter a number.");
+            if (sc.hasNextLine()) {
+                sc.nextLine();
+            }
+        }
+    }
+
+    static void removeTask() {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks to remove.");
+            return;
+        }
+
+        System.out.println("\nAll Tasks:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String status = taskDone.get(i) ? "[✓]" : "[ ]";
+            System.out.printf("%d. %s %s\n", i+1, status, tasks.get(i));
+        }
+
+        try {
+            System.out.print("Remove which task (1-" + tasks.size() + ")? ");
+            int index = sc.nextInt() - 1;
+            sc.nextLine();
+
+            if (index >= 0 && index < tasks.size()) {
+                String removedTask = tasks.get(index);
+                tasks.remove(index);
+                taskDone.remove(index);
+                System.out.println("✓ Task removed: \"" + removedTask + "\"");
+            } else {
+                System.out.println("Invalid task number!");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input! Please enter a number.");
+            if (sc.hasNextLine()) {
+                sc.nextLine();
+            }
+        }
     }
 
     static void studyTimer() {
