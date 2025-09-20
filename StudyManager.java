@@ -50,8 +50,8 @@ public class StudyManager {
     }
 
     static void manageSubjects() {
-        System.out.println("\n--- Subjects ---");
-        System.out.println("1. View  2. Add  3. Remove");
+        System.out.println("\n📖 --- Subjects --- 📖");
+        System.out.println("1. 👀 View  2. ➕ Add  3. ❌ Remove");
         
         try {
             int choice = sc.nextInt();
@@ -94,8 +94,8 @@ public class StudyManager {
     }
 
     static void manageTasks() {
-        System.out.println("\n--- Tasks ---");
-        System.out.println("1. View  2. Add  3. Mark Done  4. Remove Task");
+        System.out.println("\n✅ --- Tasks --- ✅");
+        System.out.println("1. 👀 View  2. ➕ Add  3. ✅ Mark Done  4. ❌ Remove Task");
 
         try {
             int choice = sc.nextInt();
