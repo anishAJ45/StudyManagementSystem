@@ -21,7 +21,31 @@ public class StudyManager {
             goals.put(subject, 60);
         }
         
-        System.out.println("Study Management System");
-        System.out.println("Welcome to your study tracker!");
+        System.out.println("=== Study Management System ===");
+        
+        while (true) {
+            showMenu();
+            int choice = sc.nextInt();
+            sc.nextLine();
+            
+            if (choice == 1) manageSubjects();
+            else if (choice == 2) manageTasks();
+            else if (choice == 3) studyTimer();
+            else if (choice == 4) viewProgress();
+            else if (choice == 5) {
+                System.out.println("Thanks for using Study Manager!");
+                break;
+            }
+        }
+    }
+
+    static void showMenu() {
+        System.out.println("\n--- STUDY MANAGER ---");
+        System.out.println("1. Manage Subjects");
+        System.out.println("2. Manage Tasks");
+        System.out.println("3. Study Timer");
+        System.out.println("4. View Progress");
+        System.out.println("5. Exit");
+        System.out.print("Choice: ");
     }
 }
