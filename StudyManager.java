@@ -68,7 +68,7 @@ public class StudyManager {
                 subjects.add(subject);
                 studyTime.put(subject, 0);
                 goals.put(subject, 60);
-                System.out.println("Subject added!");
+                System.out.println("✅ Subject added successfully!");
             } else if (choice == 3 && !subjects.isEmpty()) {
                 for (int i = 0; i < subjects.size(); i++) {
                     System.out.printf("%d. %s\n", i+1, subjects.get(i));
@@ -80,7 +80,7 @@ public class StudyManager {
                     subjects.remove(index);
                     studyTime.remove(subject);
                     goals.remove(subject);
-                    System.out.println("Subject removed!");
+                    System.out.println("❌ Subject removed successfully!");
                 }
             } else {
                 System.out.println("Invalid choice! Please select 1-3.");
@@ -122,9 +122,9 @@ public class StudyManager {
 
     static void viewTasks() {
         if (tasks.isEmpty()) {
-            System.out.println("No tasks yet. Add some tasks to get started!");
+            System.out.println("📝 No tasks yet. Add some tasks to get started!");
         } else {
-            System.out.println("\nYour Tasks:");
+            System.out.println("\n📋 Your Tasks:");
             for (int i = 0; i < tasks.size(); i++) {
                 String status = taskDone.get(i) ? "[✓]" : "[ ]";
                 System.out.printf("%d. %s %s\n", i+1, status, tasks.get(i));
@@ -137,7 +137,7 @@ public class StudyManager {
         String task = sc.nextLine().trim();
 
         if (task.isEmpty()) {
-            System.out.println("Task cannot be empty! Please enter a valid task.");
+            System.out.println("❌ Task cannot be empty! Please enter a valid task.");
             return;
         }
 
@@ -148,7 +148,7 @@ public class StudyManager {
 
     static void markTaskDone() {
         if (tasks.isEmpty()) {
-            System.out.println("No tasks available. Add some tasks first!");
+            System.out.println("📝 No tasks available. Add some tasks first!");
             return;
         }
 
@@ -166,7 +166,7 @@ public class StudyManager {
         }
 
         if (incompleteIndexes.isEmpty()) {
-            System.out.println("All tasks are already completed! 🎉");
+            System.out.println("🎉 All tasks are already completed! Great job! 🎉");
             return;
         }
 
