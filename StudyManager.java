@@ -52,33 +52,43 @@ public class StudyManager {
     static void manageSubjects() {
         System.out.println("\n--- Subjects ---");
         System.out.println("1. View  2. Add  3. Remove");
-        int choice = sc.nextInt();
-        sc.nextLine();
         
-        if (choice == 1) {
-            for (int i = 0; i < subjects.size(); i++) {
-                System.out.printf("%d. %s (%d min studied)\n", 
-                    i+1, subjects.get(i), studyTime.get(subjects.get(i)));
+        try {
+            int choice = sc.nextInt();
+            sc.nextLine();
+            
+            if (choice == 1) {
+                for (int i = 0; i < subjects.size(); i++) {
+                    System.out.printf("%d. %s (%d min studied)\n", 
+                        i+1, subjects.get(i), studyTime.get(subjects.get(i)));
+                }
+            } else if (choice == 2) {
+                System.out.print("Enter subject name: ");
+                String subject = sc.nextLine();
+                subjects.add(subject);
+                studyTime.put(subject, 0);
+                goals.put(subject, 60);
+                System.out.println("Subject added!");
+            } else if (choice == 3 && !subjects.isEmpty()) {
+                for (int i = 0; i < subjects.size(); i++) {
+                    System.out.printf("%d. %s\n", i+1, subjects.get(i));
+                }
+                System.out.print("Remove which subject? ");
+                int index = sc.nextInt() - 1;
+                if (index >= 0 && index < subjects.size()) {
+                    String subject = subjects.get(index);
+                    subjects.remove(index);
+                    studyTime.remove(subject);
+                    goals.remove(subject);
+                    System.out.println("Subject removed!");
+                }
+            } else {
+                System.out.println("Invalid choice! Please select 1-3.");
             }
-        } else if (choice == 2) {
-            System.out.print("Enter subject name: ");
-            String subject = sc.nextLine();
-            subjects.add(subject);
-            studyTime.put(subject, 0);
-            goals.put(subject, 60);
-            System.out.println("Subject added!");
-        } else if (choice == 3 && !subjects.isEmpty()) {
-            for (int i = 0; i < subjects.size(); i++) {
-                System.out.printf("%d. %s\n", i+1, subjects.get(i));
-            }
-            System.out.print("Remove which subject? ");
-            int index = sc.nextInt() - 1;
-            if (index >= 0 && index < subjects.size()) {
-                String subject = subjects.get(index);
-                subjects.remove(index);
-                studyTime.remove(subject);
-                goals.remove(subject);
-                System.out.println("Subject removed!");
+        } catch (Exception e) {
+            System.out.println("Invalid input! Please enter a number.");
+            if (sc.hasNextLine()) {
+                sc.nextLine();
             }
         }
     }
