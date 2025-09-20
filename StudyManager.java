@@ -298,19 +298,16 @@ public class StudyManager {
                 subject, progressBar, studied, goal, percent);
         }
 
-        // Show task completion
-        if (!tasks.isEmpty()) {
-            int completed = 0;
-            for (boolean done : taskDone) {
-                if (done) completed++;
-            }
-            double completionRate = (double) completed / tasks.size() * 100;
-            String completionBar = createProgressBar(completed, tasks.size(), 15);
-            System.out.printf("\nTasks     [%s] %d/%d (%.1f%%)\n",
-                completionBar, completed, tasks.size(), completionRate);
-        } else {
-            System.out.println("\nTasks: 0/0 completed");
+        // Show hourly breakdown if there's study time
+        showHourlyBreakdown();
+
+        // Show task completion chart
+        if (!tasks.isEmpty()){
+            showTaskCompletionChart();
         }
+
+        // Show overall statistics
+        showOverallStats();
     }
 
     static String createProgressBar(int current, int goal, int barLength) {
@@ -326,5 +323,92 @@ public class StudyManager {
             }
         }
         return bar.toString();
+    }
+
+    static void showHourlyBreakdown() {
+        System.out.println("\n⏰ Study Hours Breakdown:");
+        System.out.println("-".repeat(30));
+
+        for (String subject : subjects) {
+            int minutes = studyTime.get(subject);
+            if (minutes > 0) {
+                int hours = minutes / 60;
+                int remainingMins = minutes % 60;
+                String timeBar = createTimeBar(minutes, 120); // Max 2 hours for display
+
+                System.out.printf("%-10s %s %dh %02dm\n",
+                    subject, timeBar, hours, remainingMins);
+            }
+        }
+    }
+
+    static String createTimeBar(int minutes, int maxMinutes) {
+        int barLength = 15;
+        int filled = maxMinutes > 0 ? (int)((double)minutes / maxMinutes * barLength) : 0;
+        if (filled > barLength) filled = barLength;
+
+        StringBuilder bar = new StringBuilder("|");
+        for (int i = 0; i < barLength; i++) {
+            if (i < filled) {
+                bar.append("▓");
+            } else {
+                bar.append("▒");
+            }
+        }
+        bar.append("|");
+        return bar.toString();
+    }
+
+    static void showTaskCompletionChart() {
+        System.out.println("\n✅ Task Completion Chart:");
+        System.out.println("-".repeat(25));
+
+        int completed = 0;
+        for (boolean done : taskDone) {
+            if (done) completed++;
+        }
+
+        double completionRate = !tasks.isEmpty() ? (double)completed / tasks.size() * 100 : 0;
+        String completionBar = createProgressBar(completed, tasks.size(), 15);
+
+        System.out.printf("Tasks     [%s] %d/%d (%.1f%%)\n",
+            completionBar, completed, tasks.size(), completionRate);
+
+        // Show individual task status
+        System.out.println("\nTask Status:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String status = taskDone.get(i) ? "✓" : "○";
+            String taskBar = taskDone.get(i) ? "████████████████████" : "░░░░░░░░░░░░░░░░░░░░";
+            System.out.printf("  %s [%s] %s\n", status, taskBar.substring(0, 10),
+                tasks.get(i).length() > 25 ? tasks.get(i).substring(0, 25) + "..." : tasks.get(i));
+        }
+    }
+
+    static void showOverallStats() {
+        System.out.println("\n📈 Overall Statistics:");
+        System.out.println("=".repeat(30));
+
+        int totalStudied = 0;
+        int totalGoals = 0;
+
+        for (String subject : subjects) {
+            totalStudied += studyTime.get(subject);
+            totalGoals += goals.get(subject);
+        }
+
+        double overallProgress = totalGoals > 0 ? (double)totalStudied / totalGoals * 100 : 0;
+        String overallBar = createProgressBar(totalStudied, totalGoals, 25);
+
+        System.out.printf("Overall   [%s] %.1f%%\n", overallBar, overallProgress);
+        System.out.printf("Total Study Time: %d minutes (%d hours %d minutes)\n",
+            totalStudied, totalStudied / 60, totalStudied % 60);
+
+        if (!tasks.isEmpty()) {
+            int completedTasks = 0;
+            for (boolean done : taskDone) {
+                if (done) completedTasks++;
+            }
+            System.out.printf("Tasks Completed: %d/%d\n", completedTasks, tasks.size());
+        }
     }
 }
