@@ -185,4 +185,33 @@ public class StudyManager {
             }
         }
     }
+
+    static void viewProgress() {
+        System.out.println("\n--- Progress ---");
+
+        if (subjects.isEmpty()) {
+            System.out.println("No subjects to show.");
+            return;
+        }
+
+        System.out.println("\nStudy Time Progress:");
+        for (String subject : subjects) {
+            int studied = studyTime.get(subject);
+            int goal = goals.get(subject);
+            double percent = (double) studied / goal * 100;
+            System.out.printf("%s: %d/%d min (%.1f%%)\n",
+                subject, studied, goal, percent);
+        }
+
+        // Show task completion
+        if (!tasks.isEmpty()) {
+            int completed = 0;
+            for (boolean done : taskDone) {
+                if (done) completed++;
+            }
+            System.out.printf("\nTasks: %d/%d completed\n", completed, tasks.size());
+        } else {
+            System.out.println("\nTasks: 0/0 completed");
+        }
+    }
 }
