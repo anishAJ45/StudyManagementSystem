@@ -33,25 +33,25 @@ public class StudyManager {
             else if (choice == 3) studyTimer();
             else if (choice == 4) viewProgress();
             else if (choice == 5) {
-                System.out.println("👋 Thanks for using Study Manager! Keep studying! 📚");
+                System.out.println("[BYE] Thanks for using Study Manager! Keep studying! 📚");
                 break;
             }
         }
     }
 
     static void showMenu() {
-        System.out.println("\n📚 --- STUDY MANAGER --- 📚");
-        System.out.println("1. 📖 Manage Subjects");
-        System.out.println("2. ✅ Manage Tasks");
-        System.out.println("3. ⏰ Study Timer");
-        System.out.println("4. 📊 View Progress");
-        System.out.println("5. 🚪 Exit");
+        System.out.println("\n--- STUDY MANAGER ---");
+        System.out.println("1. Manage Subjects");
+        System.out.println("2. Manage Tasks");
+        System.out.println("3. Study Timer");
+        System.out.println("4. View Progress");
+        System.out.println("5. Exit");
         System.out.print("Choice: ");
     }
 
     static void manageSubjects() {
-        System.out.println("\n📖 --- Subjects --- 📖");
-        System.out.println("1. 👀 View  2. ➕ Add  3. ❌ Remove");
+        System.out.println("\n--- Subjects ---");
+        System.out.println("1. View  2. Add  3. Remove");
         
         try {
             int choice = sc.nextInt();
@@ -68,7 +68,7 @@ public class StudyManager {
                 subjects.add(subject);
                 studyTime.put(subject, 0);
                 goals.put(subject, 60);
-                System.out.println("✅ Subject added successfully!");
+                System.out.println("Subject added successfully!");
             } else if (choice == 3 && !subjects.isEmpty()) {
                 for (int i = 0; i < subjects.size(); i++) {
                     System.out.printf("%d. %s\n", i+1, subjects.get(i));
@@ -80,13 +80,13 @@ public class StudyManager {
                     subjects.remove(index);
                     studyTime.remove(subject);
                     goals.remove(subject);
-                    System.out.println("❌ Subject removed successfully!");
+                    System.out.println("Subject removed successfully!");
                 }
             } else {
-                System.out.println("❌ Invalid choice! Please select 1-3.");
+                System.out.println("Invalid choice! Please select 1-3.");
             }
         } catch (Exception e) {
-            System.out.println("❌ Invalid input! Please enter a number.");
+            System.out.println(" Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -94,8 +94,8 @@ public class StudyManager {
     }
 
     static void manageTasks() {
-        System.out.println("\n✅ --- Tasks --- ✅");
-        System.out.println("1. 👀 View  2. ➕ Add  3. ✅ Mark Done  4. ❌ Remove Task");
+        System.out.println("\n--- Tasks ---");
+        System.out.println("1. View  2. Add  3. Mark Done  4. Remove Task");
 
         try {
             int choice = sc.nextInt();
@@ -110,10 +110,10 @@ public class StudyManager {
             } else if (choice == 4) {
                 removeTask();
             } else {
-                System.out.println("❌ Invalid choice! Please select 1-4.");
+                System.out.println(" Invalid choice! Please select 1-4.");
             }
         } catch (Exception e) {
-            System.out.println("❌ Invalid input! Please enter a number.");
+            System.out.println(" Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -122,9 +122,9 @@ public class StudyManager {
 
     static void viewTasks() {
         if (tasks.isEmpty()) {
-            System.out.println("📝 No tasks yet. Add some tasks to get started!");
+            System.out.println("[TASK] No tasks yet. Add some tasks to get started!");
         } else {
-            System.out.println("\n📋 Your Tasks:");
+            System.out.println("\n[LIST] Your Tasks:");
             for (int i = 0; i < tasks.size(); i++) {
                 String status = taskDone.get(i) ? "[✓]" : "[ ]";
                 System.out.printf("%d. %s %s\n", i+1, status, tasks.get(i));
@@ -137,7 +137,7 @@ public class StudyManager {
         String task = sc.nextLine().trim();
 
         if (task.isEmpty()) {
-            System.out.println("❌ Task cannot be empty! Please enter a valid task.");
+            System.out.println(" Task cannot be empty! Please enter a valid task.");
             return;
         }
 
@@ -148,13 +148,13 @@ public class StudyManager {
 
     static void markTaskDone() {
         if (tasks.isEmpty()) {
-            System.out.println("📝 No tasks available. Add some tasks first!");
+            System.out.println("[TASK] No tasks available. Add some tasks first!");
             return;
         }
 
         // Show only incomplete tasks
         ArrayList<Integer> incompleteIndexes = new ArrayList<>();
-        System.out.println("\n📝 Incomplete Tasks:");
+        System.out.println("\n[TASK] Incomplete Tasks:");
         int displayNum = 1;
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -166,7 +166,7 @@ public class StudyManager {
         }
 
         if (incompleteIndexes.isEmpty()) {
-            System.out.println("🎉 All tasks are already completed! Great job! 🎉");
+            System.out.println("[SUCCESS] All tasks are already completed! Great job! [SUCCESS]");
             return;
         }
 
@@ -180,10 +180,10 @@ public class StudyManager {
                 taskDone.set(actualIndex, true);
                 System.out.println("✓ Task marked as completed: \"" + tasks.get(actualIndex) + "\"");
             } else {
-                System.out.println("❌ Invalid task number!");
+                System.out.println(" Invalid task number!");
             }
         } catch (Exception e) {
-            System.out.println("❌ Invalid input! Please enter a number.");
+            System.out.println(" Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -192,11 +192,11 @@ public class StudyManager {
 
     static void removeTask() {
         if (tasks.isEmpty()) {
-            System.out.println("📝 No tasks to remove.");
+            System.out.println("[TASK] No tasks to remove.");
             return;
         }
 
-        System.out.println("\n📋 All Tasks:");
+        System.out.println("\n[LIST] All Tasks:");
         for (int i = 0; i < tasks.size(); i++) {
             String status = taskDone.get(i) ? "[✓]" : "[ ]";
             System.out.printf("%d. %s %s\n", i+1, status, tasks.get(i));
@@ -213,10 +213,10 @@ public class StudyManager {
                 taskDone.remove(index);
                 System.out.println("✓ Task removed: \"" + removedTask + "\"");
             } else {
-                System.out.println("❌ Invalid task number!");
+                System.out.println(" Invalid task number!");
             }
         } catch (Exception e) {
-            System.out.println("❌ Invalid input! Please enter a number.");
+            System.out.println(" Invalid input! Please enter a number.");
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
@@ -225,11 +225,11 @@ public class StudyManager {
 
     static void studyTimer() {
         if (subjects.isEmpty()) {
-            System.out.println("❌ Add subjects first!");
+            System.out.println(" Add subjects first!");
             return;
         }
 
-        System.out.println("\n⏰ --- Study Timer --- ⏰");
+        System.out.println("\n[TIMER] --- Study Timer --- [TIMER]");
         for (int i = 0; i < subjects.size(); i++) {
             System.out.printf("%d. %s\n", i+1, subjects.get(i));
         }
@@ -254,8 +254,8 @@ public class StudyManager {
                 return;
             }
 
-            System.out.println("\n🎯 Studying " + subject + " for " + minutes + " minutes...");
-            System.out.println("⏳ Press Enter when done studying.");
+            System.out.println("\n[STUDY] Studying " + subject + " for " + minutes + " minutes...");
+            System.out.println("[WAIT] Press Enter when done studying.");
 
             // Try to read next line, but don't fail if there's no input
             try {
@@ -266,7 +266,7 @@ public class StudyManager {
 
             // Update study time
             studyTime.put(subject, studyTime.get(subject) + minutes);
-            System.out.println("✅ Study time updated! Total for " + subject + ": " + studyTime.get(subject) + " minutes");
+            System.out.println("[OK] Study time updated! Total for " + subject + ": " + studyTime.get(subject) + " minutes");
 
         } catch (Exception e) {
             System.out.println("Invalid input! Please enter numbers only.");
@@ -326,7 +326,7 @@ public class StudyManager {
     }
 
     static void showHourlyBreakdown() {
-        System.out.println("\n⏰ Study Hours Breakdown:");
+        System.out.println("\n[TIMER] Study Hours Breakdown:");
         System.out.println("-".repeat(30));
 
         for (String subject : subjects) {
@@ -360,7 +360,7 @@ public class StudyManager {
     }
 
     static void showTaskCompletionChart() {
-        System.out.println("\n✅ Task Completion Chart:");
+        System.out.println("\n[OK] Task Completion Chart:");
         System.out.println("-".repeat(25));
 
         int completed = 0;
