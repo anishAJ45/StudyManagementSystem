@@ -154,7 +154,7 @@ public class StudyManager {
 
         // Show only incomplete tasks
         ArrayList<Integer> incompleteIndexes = new ArrayList<>();
-        System.out.println("\nIncomplete Tasks:");
+        System.out.println("\n📝 Incomplete Tasks:");
         int displayNum = 1;
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -192,11 +192,11 @@ public class StudyManager {
 
     static void removeTask() {
         if (tasks.isEmpty()) {
-            System.out.println("No tasks to remove.");
+            System.out.println("📝 No tasks to remove.");
             return;
         }
 
-        System.out.println("\nAll Tasks:");
+        System.out.println("\n📋 All Tasks:");
         for (int i = 0; i < tasks.size(); i++) {
             String status = taskDone.get(i) ? "[✓]" : "[ ]";
             System.out.printf("%d. %s %s\n", i+1, status, tasks.get(i));
