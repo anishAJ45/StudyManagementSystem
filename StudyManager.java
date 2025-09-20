@@ -131,4 +131,58 @@ public class StudyManager {
         taskDone.add(false);
         System.out.println("✓ Task added successfully: \"" + task + "\"");
     }
+
+    static void studyTimer() {
+        if (subjects.isEmpty()) {
+            System.out.println("Add subjects first!");
+            return;
+        }
+
+        System.out.println("\n--- Study Timer ---");
+        for (int i = 0; i < subjects.size(); i++) {
+            System.out.printf("%d. %s\n", i+1, subjects.get(i));
+        }
+        System.out.print("Select subject (1-" + subjects.size() + "): ");
+
+        try {
+            int index = sc.nextInt() - 1;
+            sc.nextLine();
+
+            if (index < 0 || index >= subjects.size()) {
+                System.out.println("Invalid subject selection!");
+                return;
+            }
+
+            String subject = subjects.get(index);
+            System.out.print("Study time in minutes: ");
+            int minutes = sc.nextInt();
+            sc.nextLine();
+
+            if (minutes <= 0) {
+                System.out.println("Please enter a positive number of minutes!");
+                return;
+            }
+
+            System.out.println("\nStudying " + subject + " for " + minutes + " minutes...");
+            System.out.println("Press Enter when done studying.");
+
+            // Try to read next line, but don't fail if there's no input
+            try {
+                sc.nextLine();
+            } catch (Exception inputError) {
+                // No input available, continue anyway
+            }
+
+            // Update study time
+            studyTime.put(subject, studyTime.get(subject) + minutes);
+            System.out.println("Study time updated! Total for " + subject + ": " + studyTime.get(subject) + " minutes");
+
+        } catch (Exception e) {
+            System.out.println("Invalid input! Please enter numbers only.");
+            // Clear the scanner buffer
+            if (sc.hasNextLine()) {
+                sc.nextLine();
+            }
+        }
+    }
 }
