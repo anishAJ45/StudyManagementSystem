@@ -80,6 +80,10 @@ English: 0/60 min (0.0%)
 
 Tasks: 0/0 completed
 ```
+*UML Diagrams*
+
+### Use Case Diagram
+![Use Case Diagram](/images/use%20case%20diagram.pngimages/use case.png)
 
 ### Troubleshooting
 - "command not found": Ensure `javac` and `java` are on your PATH (install JDK).
